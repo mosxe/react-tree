@@ -1,15 +1,16 @@
-﻿import Node, { NodeType } from "./Node";
+﻿import Node, { NodeType } from './Node';
+import styles from './styles.module.scss';
 
 type Props = {
   data: NodeType[];
+  onLoadData: (params: any) => Promise<any>;
 };
 
-const Tree = ({ data }: Props) => {
-  console.log(data);
+const Tree = ({ data, onLoadData }: Props) => {
   return (
-    <ul>
+    <ul className={styles.tree}>
       {data.map((node) => (
-        <Node data={node} key={node.id} />
+        <Node data={node} key={node.id} onLoadData={onLoadData} />
       ))}
     </ul>
   );

@@ -1,0 +1,108 @@
+﻿.treenode {
+  position: relative;
+  padding: 10px 0px;
+
+  & > ul {
+    margin-top: 16px;
+  }
+
+  &-ml {
+    margin-left: 41px;
+  }
+
+  &-mb {
+    // margin-top: 26px !important;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 20px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #a5a5a5;
+    color: #ffffff;
+    width: 36px;
+    height: 36px;
+    text-transform: uppercase;
+  }
+
+  &__avatar {
+    height: 36px;
+    width: 36px;
+    padding-right: 8px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__desc {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-size: 16px;
+  }
+
+  &__subname {
+    font-size: 13px;
+    color: rgba(135, 138, 142, 1);
+  }
+
+  &__button {
+    margin: 0px !important;
+    padding: 0px !important;
+    width: 36px;
+    height: 36px;
+    background-color: transparent !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer;
+
+    &-loader {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+    }
+
+    & svg {
+      transition: transform 0.3s;
+      transform: rotate(-90deg);
+
+      & path {
+        transition: fill 0.3s;
+        fill: #ada8a8;
+      }
+    }
+
+    &_active svg {
+      transform: rotate(0deg);
+    }
+
+    &:hover svg path {
+      fill: #858282;
+    }
+  }
+}
