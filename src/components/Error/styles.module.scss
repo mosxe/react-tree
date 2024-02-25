@@ -1,0 +1,39 @@
+﻿.error-boundry {
+  margin: auto;
+  padding: 10px;
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+
+    & svg {
+      max-width: 55px;
+      width: 100%;
+      margin-right: 8px;
+      color: rgb(239, 68, 68);
+      stroke: rgb(239, 68, 68);
+    }
+  }
+
+  &__text {
+    flex: 0 1 auto;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .error-page__code {
+    font-size: 100px;
+  }
+
+  .error-page__content svg {
+    width: 25px;
+  }
+
+  .error-page__text {
+    font-size: 18px;
+  }
+}

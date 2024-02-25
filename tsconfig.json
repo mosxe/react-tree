@@ -23,8 +23,7 @@
     "paths": {
       "assets/*": ["assets/*"],
       "components/*": ["components/*"],
-      "models/*": ["models/*"],
-      "store/*": ["store/*"]
+      "models/*": ["models/*"]
     }
   },
   "include": ["src"],

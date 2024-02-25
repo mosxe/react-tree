@@ -20,7 +20,7 @@ export type NodeType = {
 
 type Props = {
   data: NodeType;
-  onLoadData: (params: any) => Promise<any>;
+  onLoadData: (id: string) => Promise<any>;
 };
 
 const Node = ({ data, onLoadData }: Props) => {
@@ -31,8 +31,8 @@ const Node = ({ data, onLoadData }: Props) => {
   const handleClick = async () => {
     if (data.is_has_children && !nodeData.length) {
       setLoading(true);
-      const dataChild = await onLoadData(data.id);
-      setNodeData(dataChild);
+      const payload = await onLoadData(data.id);
+      setNodeData(payload.data);
       setLoading(false);
       setShowChildren(!isShowChildren);
     } else {
@@ -60,14 +60,14 @@ const Node = ({ data, onLoadData }: Props) => {
         onClick={() => handleClick()}
       >
         <svg
-          width='36px'
-          height='36px'
+          width='24px'
+          height='24px'
           viewBox='0 0 24 24'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
         >
           <path
-            d='M5.70711 9.71069C5.31658 10.1012 5.31658 10.7344 5.70711 11.1249L10.5993 16.0123C11.3805 16.7927 12.6463 16.7924 13.4271 16.0117L18.3174 11.1213C18.708 10.7308 18.708 10.0976 18.3174 9.70708C17.9269 9.31655 17.2937 9.31655 16.9032 9.70708L12.7176 13.8927C12.3271 14.2833 11.6939 14.2832 11.3034 13.8927L7.12132 9.71069C6.7308 9.32016 6.09763 9.32016 5.70711 9.71069Z'
+            d='M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z'
             fill='#0F0F0F'
           />
         </svg>
@@ -77,20 +77,13 @@ const Node = ({ data, onLoadData }: Props) => {
 
   const content = () => {
     if (data.is_sub) {
-      const classNameTitle = !data.is_has_children
-        ? `${styles.treenode__title} ${styles['treenode-ml']}`
-        : styles.treenode__title;
-      return <div className={`${classNameTitle}`}>{data.title}</div>;
+      return <div className={styles.treenode__title}>{data.title}</div>;
     }
-
-    const classNameContent = !data.is_has_children
-      ? `${styles.treenode__content} ${styles['treenode-ml']}`
-      : styles.treenode__content;
 
     const markColor = data.person?.mark_color;
 
     return (
-      <div className={classNameContent}>
+      <div className={styles.treenode__content}>
         <div
           className={styles.treenode__mark}
           style={{ backgroundColor: markColor }}
@@ -114,8 +107,11 @@ const Node = ({ data, onLoadData }: Props) => {
 
   if (!data.is_has_children) {
     return (
-      <li className={`${styles.treenode} ${styles['treenode-mb']}`}>
-        {content()}
+      <li className={styles.treenode}>
+        <div className={styles.treenode__wrapper}>
+          <div className={styles.treenode__noop} aria-hidden={true}></div>
+          {content()}
+        </div>
       </li>
     );
   }

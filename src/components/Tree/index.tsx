@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 
 type Props = {
   data: NodeType[];
-  onLoadData: (params: any) => Promise<any>;
+  onLoadData: (id: string) => Promise<any>;
 };
 
 const Tree = ({ data, onLoadData }: Props) => {

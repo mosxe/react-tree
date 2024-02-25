@@ -1,0 +1,25 @@
+﻿.tree-persons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  &__avatar {
+    height: 40px;
+    width: 40px;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__name {
+    font-size: 18px;
+  }
+
+  & + ul {
+    padding-left: 0px;
+  }
+}
