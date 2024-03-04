@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-const baseDefault = '/cst_collective_mind_game/dist';
+const baseDefault = '/cst_tree_persons/dist';
 
 type ViteConfig = {
   command: string;

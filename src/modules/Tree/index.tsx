@@ -6,21 +6,25 @@ import { NodeType } from 'components/Tree/Node';
 import { fetchData } from './utils';
 import styles from './styles.module.scss';
 
-type Props = {
+export type Props = {
   photo: string;
   fullname: string;
   data: NodeType[];
+  isError: boolean;
+  errorMessage: string;
 };
 
 const initialState = {
   photo: '',
   fullname: '',
-  data: []
+  data: [],
+  isError: false,
+  errorMessage: ''
 };
 
 const Tree = () => {
   const [data, setData] = useState<Props>(initialState);
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [isError, setError] = useState<boolean>(false);
 
   useEffect(() => {
@@ -35,7 +39,7 @@ const Tree = () => {
     return <Loader />;
   }
 
-  if (isError) {
+  if (isError || data.isError) {
     return <Error />;
   }
 
@@ -43,7 +47,7 @@ const Tree = () => {
     <section>
       <div className={styles['tree-persons']}>
         <div className={styles['tree-persons__avatar']}>
-          <img src='' alt='Фото' />
+          <img src={data.photo} alt='Фото' />
         </div>
         <span className={styles['tree-persons__name']}>
           <strong>Алексеев Кирилл Владимирович</strong>

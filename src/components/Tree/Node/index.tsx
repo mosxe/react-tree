@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
 import Loader from '../Loader';
+import {Props as FetchProps} from '../../../modules/Tree/index';
 import styles from './styles.module.scss';
 import stylesTree from '../styles.module.scss';
 
@@ -20,7 +21,7 @@ export type NodeType = {
 
 type Props = {
   data: NodeType;
-  onLoadData: (id: string) => Promise<any>;
+  onLoadData: (id: string) => Promise<FetchProps>;
 };
 
 const Node = ({ data, onLoadData }: Props) => {
