@@ -40,21 +40,24 @@ const Tree = () => {
   }
 
   if (isError || data.isError) {
-    return <Error />;
+    return <Error message={data.errorMessage} />;
   }
 
   return (
-    <section>
-      <div className={styles['tree-persons']}>
-        <div className={styles['tree-persons__avatar']}>
-          <img src={data.photo} alt='Фото' />
+    <>
+      <h1 className={styles.title}>Иерархия подчинённых</h1>
+      <section>
+        <div className={styles['tree-persons']}>
+          <div className={styles['tree-persons__avatar']}>
+            <img src={data.photo} alt='Фото' />
+          </div>
+          <span className={styles['tree-persons__name']}>
+            <strong>{data.fullname}</strong>
+          </span>
         </div>
-        <span className={styles['tree-persons__name']}>
-          <strong>Алексеев Кирилл Владимирович</strong>
-        </span>
-      </div>
-      <TreeComponent data={data.data} onLoadData={fetchData} />
-    </section>
+        <TreeComponent data={data.data} onLoadData={fetchData} />
+      </section>
+    </>
   );
 };
 

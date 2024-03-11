@@ -10,6 +10,20 @@
 
   &__title {
     font-size: 22px;
+
+    &_error {
+      display: flex;
+      align-items: center;
+      margin-left: -5px;
+
+      & svg {
+        max-width: 36px;
+        width: 100%;
+        margin-right: 8px;
+        color: rgb(239, 68, 68);
+        stroke: rgb(239, 68, 68);
+      }
+    }
   }
 
   &__content {
@@ -29,6 +43,10 @@
     width: 40px;
     height: 40px;
     text-transform: uppercase;
+
+    &-hide {
+      visibility: hidden;
+    }
   }
 
   &__avatar {
