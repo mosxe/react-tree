@@ -1,7 +1,11 @@
 ﻿//Добавить типизацию ответа
-import {Props as FetchProps} from '../../modules/Tree/index';
+import { Props as FetchProps } from '../../modules/Tree/index';
 
-export const fetchData = async (id: string):Promise<FetchProps>  => {
+export const fetchData = async (
+  id: string,
+  isSub?: string,
+  personId?: string
+): Promise<FetchProps> => {
   // const DATA = {
   //   photo:
   //     'https://yt3.googleusercontent.com/ytc/AOPolaSQcDwaQIWylTeObzTREdBwpo6_qHUd9g5KHlmQTw=s900-c-k-c0x00ffffff-no-rj',
@@ -20,6 +24,21 @@ export const fetchData = async (id: string):Promise<FetchProps>  => {
   //       is_has_children: true,
   //       is_sub: true,
   //       children: []
+  //     },
+  //     {
+  //       id: '123333',
+  //       title: 'Иванов иван',
+  //       is_has_children: true,
+  //       is_sub: false,
+  //       children: [],
+  //       person: {
+  //         id: '123123',
+  //         avatar: '',
+  //         fullname: 'Петров Иван',
+  //         position: 'Разработчик',
+  //         mark: 'B',
+  //         mark_color: 'green'
+  //       }
   //     }
   //   ]
   // };
@@ -34,7 +53,9 @@ export const fetchData = async (id: string):Promise<FetchProps>  => {
   const urlParams = new URLSearchParams({
     custom_web_template_id: '6992363914750997783',
     action: 'getData',
-    id: id || ''
+    id: id || '',
+    is_sub: isSub || 'true',
+    person_id: personId || ''
   });
   const baseURL = window.location.origin;
 
@@ -47,34 +68,79 @@ export const fetchData = async (id: string):Promise<FetchProps>  => {
     if (!response.ok) {
       throw Error(response.statusText);
     }
-    console.log(response);
+
     const json = await response.json();
 
-    // if (id) {
-    //   payload.photo = DATA.photo;
-    //   payload.fullname = DATA.fullname;
-    //   payload.data = DATA.data;
-    //   payload.isError = true;
+    return json;
+
+    // if (import.meta.env.DEV) {
+    //   if (id === '55555') {
+    //     payload.photo = DATA.photo;
+    //     payload.fullname = DATA.fullname;
+    //     payload.data = [
+    //       {
+    //         id: '13333',
+    //         title: 'Группа оценки персонала №1322323',
+    //         is_has_children: true,
+    //         is_sub: true,
+    //         children: []
+    //       }
+    //     ];
+    //     return payload;
+    //   }
+    //   if (id) {
+    //     payload.photo = DATA.photo;
+    //     payload.fullname = DATA.fullname;
+    //     payload.data = [
+    //       {
+    //         id: '123',
+    //         title: 'Группа оценки персонала №1',
+    //         is_has_children: false,
+    //         is_sub: false,
+    //         children: [],
+    //         person: {
+    //           id: '123123',
+    //           avatar: '',
+    //           fullname: 'Петров Иван',
+    //           position: 'Разработчик',
+    //           mark: '',
+    //           mark_color: ''
+    //         }
+    //       },
+    //       {
+    //         id: '55555',
+    //         title: 'Группа оценки персонала №2',
+    //         is_has_children: SVGComponentTransferFunctionElement,
+    //         is_sub: false,
+    //         children: [],
+    //         person: {
+    //           id: '123131',
+    //           avatar: '',
+    //           fullname: 'Петров  2',
+    //           position: 'Разработчик 2',
+    //           mark: 'B',
+    //           mark_color: 'green'
+    //         }
+    //       },
+    //       {
+    //         id: '123233',
+    //         title: 'Группа оценки персонала №1',
+    //         is_has_children: true,
+    //         is_sub: true,
+    //         children: []
+    //       }
+    //     ];
+    //   } else {
+    //     payload.photo = DATA.photo;
+    //     payload.fullname = DATA.fullname;
+    //     payload.data = DATA.data;
+    //     payload.isError = false;
+    //   }
+
+    //   return payload;
     // } else {
-    //   payload.photo = DATA.photo;
-    //   payload.fullname = DATA.fullname;
-    //   payload.data = DATA.data;
+    //   return json;
     // }
-
-    // payload.photo = DATA.photo;
-    // payload.fullname = DATA.fullname;
-    // payload.data = DATA.data;
-
-    if (id) {
-      payload.photo = json.photo;
-      payload.fullname = json.fullname;
-      payload.data = json.data;
-      payload.isError = true;
-    } else {
-      payload.photo = json.photo;
-      payload.fullname = json.fullname;
-      payload.data = json.data;
-    }
   } catch (e) {
     const error = e as Error;
     payload.isError = true;

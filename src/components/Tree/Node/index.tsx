@@ -99,17 +99,10 @@ const Node = ({ data, personId, onLoadData }: Props) => {
     if (data.is_sub) {
       return <div className={styles.treenode__title}>{data.title}</div>;
     }
-
     const markColor = data.person?.mark_color;
-
-    const classNameMark =
-      data.person?.mark != ''
-        ? styles.treenode__mark
-        : `${styles.treenode__mark} ${styles['treenode__mark-hide']}`;
-
     return (
       <div className={styles.treenode__content}>
-        <div className={classNameMark} style={{ backgroundColor: markColor }}>
+        <div className={styles.treenode__mark} style={{ backgroundColor: markColor }}>
           <span>{data.person?.mark}</span>
         </div>
         <div className={styles.treenode__avatar}>

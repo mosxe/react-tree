@@ -38,15 +38,11 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #a5a5a5;
+    background-color: #cccbcb;
     color: #ffffff;
     width: 40px;
     height: 40px;
     text-transform: uppercase;
-
-    &-hide {
-      visibility: hidden;
-    }
   }
 
   &__avatar {
