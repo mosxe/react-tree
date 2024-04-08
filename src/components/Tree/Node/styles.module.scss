@@ -35,6 +35,7 @@
 
   &__mark {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -49,6 +50,7 @@
     height: 40px;
     width: 40px;
     padding-right: 8px;
+    flex-shrink: 0;
 
     & img {
       width: 100%;
@@ -121,5 +123,6 @@
     height: 30px;
     visibility: hidden;
     user-select: none;
+    flex-shrink: 0;
   }
 }

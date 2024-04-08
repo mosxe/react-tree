@@ -1,13 +1,13 @@
 #root-tree {
-  max-width: 1176px;
-  width: 100%;
-  margin: 0 auto;
+  margin: 0 16px;
   display: flex;
   flex-direction: column;
   min-height: 100%;
   padding: 0;
   border: none;
-  padding-left: 2em;
+  padding: 20px 32px;
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
 #wt-container > #content {
@@ -16,6 +16,6 @@
 
 @media screen and (max-width: 926px) {
   #root-tree {
-    padding-top: 2em;
+    margin-top: 40px;
   }
 }

@@ -102,7 +102,10 @@ const Node = ({ data, personId, onLoadData }: Props) => {
     const markColor = data.person?.mark_color;
     return (
       <div className={styles.treenode__content}>
-        <div className={styles.treenode__mark} style={{ backgroundColor: markColor }}>
+        <div
+          className={styles.treenode__mark}
+          style={{ backgroundColor: markColor }}
+        >
           <span>{data.person?.mark}</span>
         </div>
         <div className={styles.treenode__avatar}>
@@ -175,7 +178,7 @@ const Node = ({ data, personId, onLoadData }: Props) => {
           {nodeData.map((node) => (
             <Node
               data={node}
-              personId={data.person?.id}
+              personId={data.person?.id || node.person?.id || personId}
               key={node.id}
               onLoadData={onLoadData}
             />
