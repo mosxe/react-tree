@@ -60,6 +60,10 @@ const Node = ({ data, personId, onLoadData }: Props) => {
     }
   };
 
+  const handleLink = (personIdParam: string) => {
+    window.open(`/assessment_person/${personIdParam}`);
+  };
+
   const icon = () => {
     if (isLoading) {
       return (
@@ -100,8 +104,12 @@ const Node = ({ data, personId, onLoadData }: Props) => {
       return <div className={styles.treenode__title}>{data.title}</div>;
     }
     const markColor = data.person?.mark_color;
+    const personIdParam = personId ? personId : data.person?.id || '';
     return (
-      <div className={styles.treenode__content}>
+      <div
+        className={styles.treenode__content}
+        onClick={() => handleLink(personIdParam)}
+      >
         <div
           className={styles.treenode__mark}
           style={{ backgroundColor: markColor }}
