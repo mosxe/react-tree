@@ -6,31 +6,21 @@ import stylesTree from '../styles.module.scss';
 
 export type NodeType = {
   id: string;
-  title: string;
+  avatar: string;
+  fullname: string;
+  position: string;
+  subdivision: string;
+  mark: string;
+  mark_color: string;
   is_has_children: boolean;
-  is_sub: boolean;
-  person?: {
-    id: string;
-    avatar: string;
-    fullname: string;
-    position: string;
-    mark: string;
-    mark_color: string;
-  };
-  children: NodeType[];
 };
 
 type Props = {
   data: NodeType;
-  personId?: string;
-  onLoadData: (
-    id: string,
-    isSub: string,
-    personId?: string
-  ) => Promise<FetchProps>;
+  onLoadData: (id: string) => Promise<FetchProps>;
 };
 
-const Node = ({ data, personId, onLoadData }: Props) => {
+const Node = ({ data, onLoadData }: Props) => {
   const [nodeData, setNodeData] = useState<NodeType[]>([]);
   const [isShowChildren, setShowChildren] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -39,16 +29,7 @@ const Node = ({ data, personId, onLoadData }: Props) => {
   const handleClick = async () => {
     if (data.is_has_children && !nodeData.length) {
       setLoading(true);
-      const paramPersonId = personId
-        ? personId
-        : data?.person?.id
-        ? data.person.id
-        : '';
-      const payload = await onLoadData(
-        data.id,
-        String(data.is_sub),
-        paramPersonId
-      );
+      const payload = await onLoadData(data.id);
       if (payload.isError) {
         setError(true);
       }
@@ -67,65 +48,50 @@ const Node = ({ data, personId, onLoadData }: Props) => {
   const icon = () => {
     if (isLoading) {
       return (
-        <div className={styles['treenode__button-loader']}>
+        <div className={styles['treenode__loader']}>
           <Loader />
         </div>
       );
     }
 
     return (
-      <button
-        className={
+      <div
+        className={`${styles['treenode__circle']} ${
           isShowChildren
-            ? `${styles.treenode__button} ${styles.treenode__button_active}`
-            : styles.treenode__button
-        }
-        type='button'
+            ? styles['treenode__circle_opened']
+            : styles['treenode__circle_closed']
+        }`}
         onClick={() => handleClick()}
       >
-        <svg
-          width='24px'
-          height='24px'
-          viewBox='0 0 24 24'
-          fill='none'
-          xmlns='http://www.w3.org/2000/svg'
-        >
-          <path
-            d='M16.1795 3.26875C15.7889 2.87823 15.1558 2.87823 14.7652 3.26875L8.12078 9.91322C6.94952 11.0845 6.94916 12.9833 8.11996 14.155L14.6903 20.7304C15.0808 21.121 15.714 21.121 16.1045 20.7304C16.495 20.3399 16.495 19.7067 16.1045 19.3162L9.53246 12.7442C9.14194 12.3536 9.14194 11.7205 9.53246 11.33L16.1795 4.68297C16.57 4.29244 16.57 3.65928 16.1795 3.26875Z'
-            fill='#0F0F0F'
-          />
-        </svg>
-      </button>
+        <div className={styles['treenode__circle_horizontal']}></div>
+        <div className={styles['treenode__circle_vertical']}></div>
+      </div>
     );
   };
 
   const content = () => {
-    if (data.is_sub) {
-      return <div className={styles.treenode__title}>{data.title}</div>;
-    }
-    const markColor = data.person?.mark_color;
-    const personIdParam = personId ? personId : data.person?.id || '';
+    const markColor = data.mark_color;
+    const personIdParam = data.id || '';
     return (
       <div
         className={styles.treenode__content}
         onClick={() => handleLink(personIdParam)}
       >
+        <div className={styles.treenode__avatar}>
+          <img src={data.avatar} alt='Фото' />
+        </div>
+        <div className={styles.treenode__desc}>
+          <span className={styles.treenode__name}>
+            <strong>{data.fullname}</strong>
+          </span>
+          <span className={styles.treenode__subname}>{data.position}</span>
+          <span className={styles.treenode__subname}>{data.subdivision}</span>
+        </div>
         <div
           className={styles.treenode__mark}
           style={{ backgroundColor: markColor }}
         >
-          <span>{data.person?.mark}</span>
-        </div>
-        <div className={styles.treenode__avatar}>
-          <img src={data.person?.avatar} alt='Фото' />
-        </div>
-        <div className={styles.treenode__desc}>
-          <span className={styles.treenode__name}>
-            <strong>{data.person?.fullname}</strong>
-          </span>
-          <span className={styles.treenode__subname}>
-            {data.person?.position}
-          </span>
+          <span>{data.mark}</span>
         </div>
       </div>
     );
@@ -174,6 +140,9 @@ const Node = ({ data, personId, onLoadData }: Props) => {
 
   return (
     <li className={styles.treenode}>
+      {(isShowChildren || data.is_has_children) && (
+        <div className={styles.treenode__line}></div>
+      )}
       <div className={styles.treenode__wrapper}>
         {icon()}
         {content()}
@@ -184,12 +153,7 @@ const Node = ({ data, personId, onLoadData }: Props) => {
           style={{ display: isShowChildren ? 'block' : 'none' }}
         >
           {nodeData.map((node) => (
-            <Node
-              data={node}
-              personId={data.person?.id || node.person?.id || personId}
-              key={node.id}
-              onLoadData={onLoadData}
-            />
+            <Node data={node} key={node.id} onLoadData={onLoadData} />
           ))}
         </ul>
       )}

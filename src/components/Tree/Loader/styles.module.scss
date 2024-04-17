@@ -1,11 +1,12 @@
 ﻿.spinner {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-width: 0.2em;
+  width: 34px;
+  height: 34px;
+  border-width: 2px;
   color: #ada8a8;
+  background-color: #ffffff;
   vertical-align: text-bottom;
-  border: 0.2em solid currentColor;
+  border: 2px solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
   animation: spinner-border 0.75s linear infinite;

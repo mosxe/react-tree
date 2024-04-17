@@ -1,9 +1,28 @@
 ﻿.treenode {
   position: relative;
 
+  &:has(.treenode__circle) {
+    &::before {
+      content: '';
+      height: 100%;
+      display: block;
+      left: 18.5px;
+      position: absolute;
+      border-left: 2px solid #ebebec;
+    }
+
+    &:last-of-type::before {
+      display: none;
+    }
+
+    &:last-child::before {
+      display: none;
+    }
+  }
+
   &__wrapper {
     display: flex;
-    gap: 5px;
+    gap: 20px;
     align-items: center;
     padding: 6px 0px;
   }
@@ -30,13 +49,14 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 14px 0px;
+    padding: 14px;
     border-radius: 8px;
     cursor: pointer;
+    background-color: #ebebec;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #ebebec;
+      background-color: #dadada;
     }
   }
 
@@ -45,11 +65,12 @@
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
+    margin-left: 12px;
     border-radius: 50%;
     background-color: #cccbcb;
     color: #ffffff;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     text-transform: uppercase;
   }
 
@@ -63,6 +84,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 50%;
     }
   }
 
@@ -73,54 +95,12 @@
 
   &__name {
     font-size: 16px;
+    margin-bottom: 4px;
   }
 
   &__subname {
     font-size: 13px;
     color: rgba(135, 138, 142, 1);
-  }
-
-  &__button {
-    display: flex;
-    align-items: center;
-    margin: 0px !important;
-    padding: 0px !important;
-    width: 30px;
-    height: 30px;
-    background-color: transparent !important;
-    border: none !important;
-    outline: none !important;
-    cursor: pointer;
-
-    &-loader {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-    }
-
-    & svg {
-      width: 28px;
-      height: 24px;
-      display: inline-block;
-      transition: transform 0.3s;
-      transform: rotate(-180deg);
-
-      & path {
-        transition: fill 0.3s;
-        fill: #ada8a8;
-      }
-    }
-
-    &_active svg {
-      transform: rotate(-90deg);
-    }
-
-    &:hover svg path {
-      fill: #858282;
-    }
   }
 
   &__noop {
@@ -131,5 +111,97 @@
     visibility: hidden;
     user-select: none;
     flex-shrink: 0;
+  }
+
+  &__circle {
+    flex-shrink: 0;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    border-radius: 100%;
+    background-color: #00b9bf;
+    transition: background-color 0.5s;
+    cursor: pointer;
+
+    &_horizontal {
+      position: absolute;
+      background-color: #ffffff;
+      width: 16px;
+      height: 2px;
+      left: 50%;
+      margin-left: -8px;
+      top: 50%;
+      margin-top: -1px;
+    }
+
+    &_vertical {
+      position: absolute;
+      background-color: #ffffff;
+      width: 2px;
+      height: 16px;
+      left: 50%;
+      margin-left: -1px;
+      top: 50%;
+      margin-top: -8px;
+    }
+
+    &_closed .treenode__circle_vertical {
+      transition: all 0.5s ease-in-out;
+      transform: rotate(-90deg);
+    }
+
+    &_closed .treenode__circle_horizontal {
+      transition: all 0.5s ease-in-out;
+      transform: rotate(-90deg);
+      opacity: 1;
+    }
+
+    &_opened {
+      opacity: 1;
+      background-color: #ffdf68;
+
+      & .treenode__circle_vertical {
+        transition: all 0.5s ease-in-out;
+        transform: rotate(90deg);
+      }
+
+      & .treenode__circle_horizontal {
+        transition: all 0.5s ease-in-out;
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+    }
+  }
+
+  &__loader {
+    position: relative;
+  }
+
+  &__line {
+    height: 100%;
+    display: block;
+    left: 18.5px;
+    position: absolute;
+    border-left: 2px solid #ebebec;
+  }
+
+  &:has(.treenode__loader) {
+    &::before {
+      content: '';
+      height: 100%;
+      display: block;
+      left: 18.5px;
+      position: absolute;
+      border-left: 2px solid #ebebec;
+    }
+
+    &:last-of-type::before {
+      display: none;
+    }
+
+    &:last-child::before {
+      display: none;
+    }
   }
 }
