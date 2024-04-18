@@ -97,6 +97,8 @@ const Node = ({ data, onLoadData }: Props) => {
     );
   };
 
+  const isShowLine = isShowChildren || data.is_has_children;
+
   if (isError) {
     return (
       <li className={styles.treenode}>
@@ -140,9 +142,7 @@ const Node = ({ data, onLoadData }: Props) => {
 
   return (
     <li className={styles.treenode}>
-      {(isShowChildren || data.is_has_children) && (
-        <div className={styles.treenode__line}></div>
-      )}
+      {isShowLine && <div className={styles.treenode__line}></div>}
       <div className={styles.treenode__wrapper}>
         {icon()}
         {content()}

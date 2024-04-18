@@ -1,0 +1,88 @@
+﻿{
+  "photo": "/pics/nophoto.jpg",
+  "fullname": "Вяткина Снежана Владимировна",
+  "data": [
+    {
+      "id": "6968602354205424106",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Еремянц Мария Александровна",
+      "position": "Руководитель группы",
+      "subdivision": "Группа по работе с кредитными и страховыми услугами",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": true
+    },
+    {
+      "id": "6974168406975518782",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Романов Роман Андреевич",
+      "position": "Руководитель группы",
+      "subdivision": "Группа логистических услуг",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": true
+    },
+    {
+      "id": "7255453519979024161",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Гусев Сергей Сергеевич",
+      "position": "Руководитель проектов",
+      "subdivision": "Категория Сервис",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": false
+    },
+    {
+      "id": "7242465307147724080",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Королёва Анна Юрьевна",
+      "position": "Специалист",
+      "subdivision": "Группа PIM",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": false
+    },
+    {
+      "id": "6971941764037477261",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Лосева Анна Сергеевна",
+      "position": "Специалист",
+      "subdivision": "Группа PIM",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": false
+    },
+    {
+      "id": "6410709982205654224",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Панфилова Татьяна Евгеньевна",
+      "position": "Специалист",
+      "subdivision": "Группа PIM",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": false
+    },
+    {
+      "id": "6972683294266846592",
+      "avatar": "/pics/nophoto.jpg",
+      "fullname": "Посмык Альбина Юрьевна",
+      "position": "Специалист",
+      "subdivision": "Группа PIM",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": false
+    },
+    {
+      "id": "6410709822683036896",
+      "avatar": "/download_file.html?file_id=7241197947898853181",
+      "fullname": "Соловьева Олеся Вячеславовна",
+      "position": "Менеджер по продукту",
+      "subdivision": "Группа PIM",
+      "mark": "",
+      "mark_color": "",
+      "is_has_children": false
+    }
+  ],
+  "isError": false,
+  "errorMessage": ""
+}
