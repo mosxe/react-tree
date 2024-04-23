@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useState, useLayoutEffect, useRef } from 'react';
 import Loader from '../Loader';
 import { Props as FetchProps } from '../../../modules/Tree/index';
 import styles from './styles.module.scss';
@@ -18,13 +18,21 @@ export type NodeType = {
 type Props = {
   data: NodeType;
   onLoadData: (id: string) => Promise<FetchProps>;
+  resize: (width: number) => void;
+  widthElems: number[];
 };
 
-const Node = ({ data, onLoadData }: Props) => {
+const Node = ({ data, onLoadData, resize, widthElems }: Props) => {
   const [nodeData, setNodeData] = useState<NodeType[]>([]);
   const [isShowChildren, setShowChildren] = useState<boolean>(false);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [widthNodes, setWidthNodes] = useState<number[]>([]);
+
+  useLayoutEffect(() => {
+    resize(ref.current?.offsetWidth || 0);
+  }, []);
 
   const handleClick = async () => {
     if (data.is_has_children && !nodeData.length) {
@@ -69,13 +77,22 @@ const Node = ({ data, onLoadData }: Props) => {
     );
   };
 
+  const resizeNodes = (widthElem: number) => {
+    setWidthNodes((oldValues) => [...oldValues, widthElem]);
+  };
+
   const content = () => {
     const markColor = data.mark_color;
     const personIdParam = data.id || '';
+    const widthElem = !widthElems.length
+      ? 'auto'
+      : `${Math.max(...widthElems)}px`;
     return (
       <div
         className={styles.treenode__content}
         onClick={() => handleLink(personIdParam)}
+        ref={ref}
+        style={{ minWidth: widthElem }}
       >
         <div className={styles.treenode__avatar}>
           <img src={data.avatar} alt='Фото' />
@@ -153,7 +170,13 @@ const Node = ({ data, onLoadData }: Props) => {
           style={{ display: isShowChildren ? 'block' : 'none' }}
         >
           {nodeData.map((node) => (
-            <Node data={node} key={node.id} onLoadData={onLoadData} />
+            <Node
+              data={node}
+              key={node.id}
+              onLoadData={onLoadData}
+              resize={resizeNodes}
+              widthElems={widthNodes}
+            />
           ))}
         </ul>
       )}
